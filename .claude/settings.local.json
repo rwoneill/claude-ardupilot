@@ -1,0 +1,35 @@
+{
+  "_comment": "Pre-approved actions for an ArduPilot Claude Code workspace. Drop this at <project>/.claude/settings.local.json. Add to it as your workflow grows; Claude will prompt the first time it tries something not on the list.",
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:ardupilot.org)",
+      "WebFetch(domain:discuss.ardupilot.org)",
+      "WebFetch(domain:firmware.ardupilot.org)",
+
+      "Bash(python -c *)",
+      "Bash(python -m pymavlink.tools.mavlogdump *)",
+      "Bash(python -m pip show *)",
+      "Bash(python -m pip list)",
+
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git diff *)",
+      "Bash(git status)",
+      "Bash(git branch *)",
+      "Bash(git rev-parse *)",
+      "Bash(git ls-files *)",
+
+      "Bash(ls *)",
+      "Bash(file *)",
+      "Bash(stat *)",
+      "Bash(wc *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force *)",
+      "Bash(git reset --hard *)"
+    ]
+  }
+}
