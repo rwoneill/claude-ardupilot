@@ -151,11 +151,44 @@ The Lua sandbox is **not** desktop Lua. No `io`, no `os.execute`, no arbitrary `
 
 ---
 
-## MAVLink & ground control
+## MAVLink & ground control tooling
 
-- **Protocol:** MAVLink v2. Definitions: `modules/mavlink/message_definitions/v1.0/`. ArduPilot uses `ardupilotmega.xml`, which extends `common.xml`.
-- **GCS options:** Mission Planner (most complete, Windows), QGroundControl (cross-platform), MAVProxy (CLI, scripting-friendly, used in SITL), APM Planner 2.
-- MAVLink is the boundary for companion computers, telemetry, and parameter access.
+MAVLink is the external boundary for ArduPilot — companion computers, telemetry radios, ground stations, and routers all speak it.
+
+**MAVLink protocol**
+
+- Site / message reference: https://mavlink.io/en/
+- Message catalog: https://mavlink.io/en/messages/
+- Source (definitions, generators): https://github.com/mavlink/mavlink
+- ArduPilot uses MAVLink v2 with the `ardupilotmega.xml` dialect, which extends `common.xml`. Definitions in the ArduPilot repo: `modules/mavlink/message_definitions/v1.0/`.
+
+**Mission Planner** — feature-rich Windows GCS, the most complete option for ArduPilot.
+
+- Docs: https://ardupilot.org/planner/
+- Source: https://github.com/ArduPilot/MissionPlanner
+- Forum category: https://discuss.ardupilot.org/c/mission-planner/
+
+**QGroundControl** — cross-platform GCS (Windows / macOS / Linux / Android / iOS), simpler interface than Mission Planner.
+
+- Site: https://qgroundcontrol.com/
+- Docs: https://docs.qgroundcontrol.com/
+- Source: https://github.com/mavlink/qgroundcontrol
+
+**MAVProxy** — CLI ground station, scripting-friendly, used by SITL and the autotest framework.
+
+- Docs: https://ardupilot.org/mavproxy/
+- Source: https://github.com/ArduPilot/MAVProxy
+- Companion library `pymavlink` (Python bindings + log parsing): https://github.com/ArduPilot/pymavlink
+
+**MAVLink Router** — multiplex MAVLink between multiple endpoints (vehicle, ground station, companion computer, telemetry radio). Useful when one telemetry stream needs to feed several consumers.
+
+- Source: https://github.com/mavlink-router/mavlink-router
+
+**APM Planner 2** — older cross-platform GCS, less actively developed; mostly a fallback if Mission Planner and QGroundControl don't fit.
+
+- Docs: https://ardupilot.org/planner2/
+
+When answering MAVLink-specific questions (message fields, units, expected ranges), prefer the canonical message definitions at https://mavlink.io/en/messages/ or the matching XML in `modules/mavlink/message_definitions/v1.0/` on the target branch — message field meanings sometimes differ slightly between dialects, and ArduPilot adds custom messages in `ardupilotmega.xml`.
 
 ---
 
